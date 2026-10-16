@@ -1,0 +1,32 @@
+
+name: Next Js
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Next.js App
+        run: npm run build
+      - name: Build on Arifact
+        uses: actions/upload-artifact@v7.0.2
+        with:
+           name: Nextjs Build 
+           path: out/
+        
